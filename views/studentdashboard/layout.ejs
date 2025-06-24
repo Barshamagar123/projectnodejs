@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-indigo-800 text-white">
+                <div class="flex items-center justify-center h-16 px-4 bg-indigo-900">
+                    <div class="flex items-center">
+                        <i class="fas fa-graduation-cap text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">TU Student Portal</span>
+                    </div>
+                </div>
+                <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
+                    <div class="flex items-center px-4 py-3 mt-2 rounded-lg bg-indigo-700">
+                        <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Profile">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">John Doe</p>
+                            <p class="text-xs">BHM 4th Year</p>
+                        </div>
+                    </div>
+                    
+                    <nav class="mt-6">
+                        <div>
+                            <a href="#" class="flex items-center px-4 py-3 rounded-lg bg-indigo-900 text-white">
+                                <i class="fas fa-tachometer-alt mr-3"></i>
+                                Dashboard
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-user mr-3"></i>
+                                Profile
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-calendar-alt mr-3"></i>
+                                Academic Calendar
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-clipboard-check mr-3"></i>
+                                Attendance
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-tasks mr-3"></i>
+                                Assignments
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-chart-line mr-3"></i>
+                                Results
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-project-diagram mr-3"></i>
+                                Project Work
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-briefcase mr-3"></i>
+                                Internship Log
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-book mr-3"></i>
+                                Library
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-indigo-700">
+                                <i class="fas fa-envelope mr-3"></i>
+                                Letters
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="px-4 py-4 border-t border-indigo-700">
+                    <a href="#" class="flex items-center text-gray-200 hover:text-white">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <%- include('sidebar.ejs') %>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <div class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
+                <div class="flex items-center">
+                    <button onclick="toggleMobileSidebar()" class="md:hidden text-gray-500 mr-2">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold text-gray-800">Dashboard</h1>
+                </div>
+                <div class="flex items-center">
+                    <button class="p-2 text-gray-500 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-bell"></i>
+                        <span class="sr-only">Notifications</span>
+                    </button>
+                    <div class="ml-4 relative">
+                        <button class="flex items-center focus:outline-none">
+                            <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Profile">
+                            <span class="ml-2 text-sm font-medium text-gray-700 hidden md:inline">John Doe</span>
+                            <i class="fas fa-chevron-down ml-1 text-gray-500 text-xs hidden md:inline"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                <!-- Welcome banner -->
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-md p-6 text-white mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">Welcome back, John!</h2>
+                            <p class="mt-2">You have 3 new notifications and 2 pending assignments</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <button class="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-200">
+                                View Notifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Current Semester</p>
+                                <p class="text-xl font-semibold text-gray-800">4th Year - 1st Sem</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Overall Attendance</p>
+                                <p class="text-xl font-semibold text-gray-800">87.5%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Current GPA</p>
+                                <p class="text-xl font-semibold text-gray-800">3.45</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Pending Assignments</p>
+                                <p class="text-xl font-semibold text-gray-800">2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and main content -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Attendance chart -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Attendance Overview</h3>
+                            <select class="text-sm border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option>This Semester</option>
+                                <option>Last Semester</option>
+                                <option>All Time</option>
+                            </select>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick links -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-indigo-100 text-indigo-600 mr-3">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <span>Upload Assignment</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-green-100 text-green-600 mr-3">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <span>Generate Bonafide</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mr-3">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <span>Access Library</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-purple-100 text-purple-600 mr-3">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <span>Project Submission</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent activities and upcoming events -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Recent activities -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-indigo-100 text-indigo-600 mr-3 mt-1">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Assignment submitted for <span class="text-indigo-600">Research Methodology</span></p>
+                                    <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-green-100 text-green-600 mr-3 mt-1">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">New material uploaded for <span class="text-green-600">Tourism Planning</span></p>
+                                    <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-yellow-100 text-yellow-600 mr-3 mt-1">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Attendance below 75% in <span class="text-yellow-600">Hotel Operations</span></p>
+                                    <p class="text-xs text-gray-500 mt-1">2 days ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mr-3 mt-1">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Internal marks updated for <span class="text-blue-600">Semester 4</span></p>
+                                    <p class="text-xs text-gray-500 mt-1">3 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming events -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Upcoming Events</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-red-100 text-red-600 rounded-md px-2 py-1 text-xs font-medium mr-3 mt-1">
+                                    15 Jun
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Final Project Submission Deadline</p>
+                                    <p class="text-xs text-gray-500 mt-1">BHM 4th Year</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 text-purple-600 rounded-md px-2 py-1 text-xs font-medium mr-3 mt-1">
+                                    20 Jun
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">TU Semester Exams Begin</p>
+                                    <p class="text-xs text-gray-500 mt-1">All Programs</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-green-100 text-green-600 rounded-md px-2 py-1 text-xs font-medium mr-3 mt-1">
+                                    25 Jun
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Internship Orientation</p>
+                                    <p class="text-xs text-gray-500 mt-1">Mandatory for BHM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 rounded-md px-2 py-1 text-xs font-medium mr-3 mt-1">
+                                    30 Jun
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Library Due Date</p>
+                                    <p class="text-xs text-gray-500 mt-1">Return borrowed books</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            if (sidebar.style.display === 'none' || !sidebar.style.display) {
+                sidebar.style.display = 'block';
+            } else {
+                sidebar.style.display = 'none';
+            }
+        }
+
+        // Initialize charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attendance chart
+            const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(attendanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Hotel Operations', 'Tourism Planning', 'Research Methods', 'Food Science', 'Front Office'],
+                    datasets: [{
+                        label: 'Attendance Percentage',
+                        data: [82, 91, 75, 88, 94],
+                        backgroundColor: [
+                            'rgba(79, 70, 229, 0.7)',
+                            'rgba(99, 102, 241, 0.7)',
+                            'rgba(129, 140, 248, 0.7)',
+                            'rgba(165, 180, 252, 0.7)',
+                            'rgba(199, 210, 254, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(79, 70, 229, 1)',
+                            'rgba(99, 102, 241, 1)',
+                            'rgba(129, 140, 248, 1)',
+                            'rgba(165, 180, 252, 1)',
+                            'rgba(199, 210, 254, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

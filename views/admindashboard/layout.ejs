@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        secondary: {
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+       
+
+<%- include('sidebar.ejs') %>
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top navigation -->
+            <div class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
+                <div class="flex items-center">
+                    <button onclick="toggleMobileSidebar()" class="md:hidden text-gray-500 mr-2">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold text-gray-800">Admin Dashboard</h1>
+                </div>
+                <div class="flex items-center">
+                    <div class="relative mr-4">
+                        <button class="p-2 text-gray-500 rounded-full hover:bg-gray-100 relative">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                    </div>
+                    <div class="ml-4 relative">
+                        <button class="flex items-center focus:outline-none">
+                            <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="Profile">
+                            <span class="ml-2 text-sm font-medium text-gray-700 hidden md:inline">Admin User</span>
+                            <i class="fas fa-chevron-down ml-1 text-gray-500 text-xs hidden md:inline"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                <!-- Welcome banner -->
+                <div class="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-lg shadow-md p-6 text-white mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">College Administration Panel</h2>
+                            <p class="mt-2">Manage students, faculty, courses, and all college operations</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <button class="bg-white text-primary-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition duration-200">
+                                Quick Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Total Students</p>
+                                <p class="text-xl font-semibold text-gray-800">1,248</p>
+                                <p class="text-xs text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 12 new this month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Faculty Members</p>
+                                <p class="text-xl font-semibold text-gray-800">48</p>
+                                <p class="text-xs text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 2 new hires</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Fee Collection</p>
+                                <p class="text-xl font-semibold text-gray-800">₨ 2.8M</p>
+                                <p class="text-xs text-red-600 mt-1"><i class="fas fa-arrow-down mr-1"></i> 15% pending</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-500">Pass Percentage</p>
+                                <p class="text-xl font-semibold text-gray-800">92.5%</p>
+                                <p class="text-xs text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 3.2% increase</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and main content -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Student enrollment chart -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Student Enrollment Trends</h3>
+                            <select class="text-sm border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <option>Last 5 Years</option>
+                                <option>Last 3 Years</option>
+                                <option>Current Year</option>
+                            </select>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="enrollmentChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick actions -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mr-3">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <span>Add New Student</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-green-100 text-green-600 mr-3">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <span>Upload Results</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-purple-100 text-purple-600 mr-3">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <span>Create Notice</span>
+                            </a>
+                            <a href="#" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <div class="p-2 rounded-full bg-yellow-100 text-yellow-600 mr-3">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <span>Generate Fee Report</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent activities and pending tasks -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Recent activities -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-blue-100 text-blue-600 mr-3 mt-1">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">15 new students registered for BHM 1st Year</p>
+                                    <p class="text-xs text-gray-500 mt-1">Today, 10:45 AM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-green-100 text-green-600 mr-3 mt-1">
+                                    <i class="fas fa-poll"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Internal marks uploaded for BBA 4th Semester</p>
+                                    <p class="text-xs text-gray-500 mt-1">Yesterday, 3:30 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-purple-100 text-purple-600 mr-3 mt-1">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Fee payment received from 32 students</p>
+                                    <p class="text-xs text-gray-500 mt-1">Yesterday, 11:20 AM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 rounded-full bg-yellow-100 text-yellow-600 mr-3 mt-1">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">New event added: "Research Methodology Workshop"</p>
+                                    <p class="text-xs text-gray-500 mt-1">2 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending tasks -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Pending Tasks</h3>
+                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">4 items</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Approve 5 admission applications</p>
+                                    <p class="text-xs text-gray-500 mt-1">Due today</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Upload TU semester exam schedule</p>
+                                    <p class="text-xs text-gray-500 mt-1">Due tomorrow</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Review CMAT mock test results</p>
+                                    <p class="text-xs text-gray-500 mt-1">Due in 2 days</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Generate bonafide certificates for 12 students</p>
+                                    <p class="text-xs text-gray-500 mt-1">Due in 3 days</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enrollment chart
+            const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
+            const enrollmentChart = new Chart(enrollmentCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023'],
+                    datasets: [
+                        {
+                            label: 'BHM',
+                            data: [120, 145, 160, 185, 210],
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'BBA',
+                            data: [180, 195, 210, 225, 250],
+                            borderColor: 'rgba(124, 58, 237, 1)',
+                            backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'BBS',
+                            data: [150, 165, 180, 175, 190],
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Results - College Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function validateFile() {
+            const fileInput = document.getElementById('resultFile');
+            const submitBtn = document.getElementById('submitBtn');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const validExtensions = ['csv', 'xlsx', 'xls'];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                
+                if (validExtensions.includes(fileExtension)) {
+                    submitBtn.disabled = false;
+                    document.getElementById('fileError').textContent = '';
+                } else {
+                    submitBtn.disabled = true;
+                    document.getElementById('fileError').textContent = 'Please upload a CSV or Excel file';
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <%- include('../sidebar.ejs') %>
+
+        <!-- Main content -->
+        <div class="flex-1 overflow-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Import Results</h1>
+                    <a href="/results" class="text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to Results
+                    </a>
+                </div>
+
+                <!-- Import Form -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <form action="/results/import" method="POST" enctype="multipart/form-data">
+                        <div class="space-y-6">
+                            <!-- Course Selection -->
+                            <div>
+                                <label for="course" class="block text-sm font-medium text-gray-700 mb-1">Course*</label>
+                                <select id="course" name="course" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    <option value="">Select Course</option>
+                                    <option value="CS101">CS101 - Introduction to Programming</option>
+                                    <option value="MATH201">MATH201 - Calculus II</option>
+                                    <option value="PHY101">PHY101 - General Physics</option>
+                                    <option value="CHEM101">CHEM101 - General Chemistry</option>
+                                </select>
+                            </div>
+
+                            <!-- Semester Selection -->
+                            <div>
+                                <label for="semester" class="block text-sm font-medium text-gray-700 mb-1">Semester*</label>
+                                <select id="semester" name="semester" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    <option value="">Select Semester</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                </select>
+                            </div>
+
+                            <!-- Academic Year -->
+                            <div>
+                                <label for="year" class="block text-sm font-medium text-gray-700 mb-1">Academic Year*</label>
+                                <input type="text" id="year" name="year" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                    placeholder="e.g., 2023-2024">
+                            </div>
+
+                            <!-- File Upload -->
+                            <div>
+                                <label for="resultFile" class="block text-sm font-medium text-gray-700 mb-1">Results File*</label>
+                                <div class="mt-1 flex items-center">
+                                    <label for="resultFile" class="cursor-pointer">
+                                        <span class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                            <i class="fas fa-file-upload mr-2"></i> Choose File
+                                        </span>
+                                        <input id="resultFile" name="resultFile" type="file" class="sr-only" accept=".csv,.xlsx,.xls" onchange="validateFile()">
+                                    </label>
+                                    <span id="fileName" class="ml-2 text-sm text-gray-500">No file chosen</span>
+                                </div>
+                                <p id="fileError" class="mt-1 text-sm text-red-600"></p>
+                                <p class="mt-2 text-sm text-gray-500">
+                                    Upload a CSV or Excel file with student results. <a href="/templates/results-template.csv" class="text-primary-600 hover:text-primary-800">Download template</a>
+                                </p>
+                            </div>
+
+                            <!-- Import Options -->
+                            <div class="border-t border-gray-200 pt-4">
+                                <fieldset>
+                                    <legend class="text-sm font-medium text-gray-700">Import Options</legend>
+                                    <div class="mt-2 space-y-2">
+                                        <div class="flex items-center">
+                                            <input id="updateExisting" name="importOption" type="radio" value="update" checked
+                                                class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300">
+                                            <label for="updateExisting" class="ml-2 block text-sm text-gray-700">
+                                                Update existing records and add new ones
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="onlyNew" name="importOption" type="radio" value="new"
+                                                class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300">
+                                            <label for="onlyNew" class="ml-2 block text-sm text-gray-700">
+                                                Only add new records (skip existing)
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="replaceAll" name="importOption" type="radio" value="replace"
+                                                class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300">
+                                            <label for="replaceAll" class="ml-2 block text-sm text-gray-700">
+                                                Replace all existing records for this course
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end space-x-4">
+                            <button type="reset" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                Cancel
+                            </button>
+                            <button id="submitBtn" type="submit" disabled class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <i class="fas fa-upload mr-2"></i>Import Results
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Instructions Section -->
+                <div class="mt-8 bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Import Instructions</h2>
+                    <div class="prose prose-sm text-gray-500">
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Download and use the provided template file to ensure proper formatting</li>
+                            <li>Required columns: Student ID, Student Name, Marks (out of 100)</li>
+                            <li>Optional columns: Grade (will be calculated if not provided)</li>
+                            <li>Ensure student IDs match existing records in the system</li>
+                            <li>Maximum file size: 5MB</li>
+                            <li>Supported formats: CSV, XLSX, XLS</li>
+                        </ol>
+                        <p class="mt-4 text-sm text-gray-500">
+                            <strong>Note:</strong> The import process may take several minutes for large files. Do not close the browser during import.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display the selected file name
+        document.getElementById('resultFile').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

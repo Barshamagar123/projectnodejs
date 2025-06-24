@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Department - Hotel Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  
+</head>
+<body class="bg-gray-100">
+  
+    <div class="md:hidden bg-primary-800 p-4">
+        <button onclick="toggleMobileSidebar()" class="text-white">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile sidebar -->
+    <div class="md:hidden fixed inset-0 z-40" id="mobile-sidebar" style="display: none;">
+        <!-- Mobile sidebar content would go here -->
+    </div>
+
+    <div class="flex">
+         <%- include('../sidebar.ejs') %>
+     
+        <!-- Main content -->
+        <div class="flex-1 overflow-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Add New Department</h1>
+                    <a href="/departments">
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Departments
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Department Form -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-6">
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Department Information -->
+                                <div class="space-y-4">
+                                    <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Department Information</h3>
+                                    
+                                    <div>
+                                        <label for="deptName" class="block text-sm font-medium text-gray-700">Department Name *</label>
+                                        <input type="text" id="deptName" name="deptName" required
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="deptCode" class="block text-sm font-medium text-gray-700">Department Code *</label>
+                                        <input type="text" id="deptCode" name="deptCode" required
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="deptIcon" class="block text-sm font-medium text-gray-700">Department Icon</label>
+                                        <select id="deptIcon" name="deptIcon"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="desktop">Front Office (Desktop)</option>
+                                            <option value="utensils">Food Production (Utensils)</option>
+                                            <option value="glass-cheers">F&B (Glass)</option>
+                                            <option value="broom">Housekeeping (Broom)</option>
+                                            <option value="user-tie">Management (Tie)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="deptDescription" class="block text-sm font-medium text-gray-700">Description</label>
+                                        <textarea id="deptDescription" name="deptDescription" rows="3"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <!-- Management Information -->
+                                <div class="space-y-4">
+                                    <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Management Information</h3>
+                                    
+                                    <div>
+                                        <label for="manager" class="block text-sm font-medium text-gray-700">Department Manager *</label>
+                                        <select id="manager" name="manager" required
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="">Select Manager</option>
+                                            <option value="1">John Smith</option>
+                                            <option value="2">Maria Garcia</option>
+                                            <option value="3">David Chen</option>
+                                            <option value="4">Sarah Johnson</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="staffCount" class="block text-sm font-medium text-gray-700">Staff Count *</label>
+                                        <input type="number" id="staffCount" name="staffCount" min="1" required
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="budget" class="block text-sm font-medium text-gray-700">Annual Budget *</label>
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">$</span>
+                                            </div>
+                                            <input type="text" name="budget" id="budget" required
+                                                class="focus:ring-primary-500 focus:border-primary-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md py-2 px-3"
+                                                placeholder="0.00">
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="status" class="block text-sm font-medium text-gray-700">Status *</label>
+                                        <select id="status" name="status" required
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                            <option value="maintenance">Maintenance</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Form Actions -->
+                            <div class="mt-8 flex justify-end space-x-3">
+                                <button type="reset" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                                    <i class="fas fa-times mr-2"></i>Reset
+                                </button>
+                                <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg">
+                                    <i class="fas fa-save mr-2"></i>Save Department
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

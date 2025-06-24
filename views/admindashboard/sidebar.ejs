@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        secondary: {
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+     <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-primary-700 text-white">
+                <div class="flex items-center justify-center h-16 px-4 bg-primary-800">
+                    <div class="flex items-center">
+                        <i class="fas fa-university text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">College Admin</span>
+                    </div>
+                </div>
+                <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
+                    <div class="flex items-center px-4 py-3 mt-2 rounded-lg bg-primary-600">
+                        <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="Profile">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">Admin User</p>
+                            <p class="text-xs">Super Administrator</p>
+                        </div>
+                    </div>
+                    
+                    <nav class="mt-6">
+                        <div>
+                            <a href="#" class="flex items-center px-4 py-3 rounded-lg bg-primary-800 text-white">
+                                <i class="fas fa-tachometer-alt mr-3"></i>
+                                Dashboard
+                            </a>
+                            <a href="/students" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-users mr-3"></i>
+                                Students
+                            </a>
+                            <a href="/departments" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-chalkboard-teacher mr-3"></i>
+                                Department
+                            </a>
+                            <a href="/course" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-book mr-3"></i>
+                                Courses
+                            </a>
+                            <a href="/results" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-poll mr-3"></i>
+                                Results
+                            </a>
+                            <a href="/team" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-clipboard-list mr-3"></i>
+                                Our Team
+                            </a>
+                           
+                            <a href="/events" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-calendar-alt mr-3"></i>
+                                Events
+                            </a>
+                            <a href="/notice" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-bullhorn mr-3"></i>
+                                Notices
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-book-reader mr-3"></i>
+                                Library
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-money-bill-wave mr-3"></i>
+                                Payments
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 mt-1 rounded-lg text-gray-200 hover:bg-primary-600">
+                                <i class="fas fa-file-export mr-3"></i>
+                                Reports
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                <div class="px-4 py-4 border-t border-primary-600">
+                    <a href="#" class="flex items-center text-gray-200 hover:text-white">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script>
+            function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            if (sidebar.style.display === 'none' || !sidebar.style.display) {
+                sidebar.style.display = 'block';
+            } else {
+                sidebar.style.display = 'none';
+            }
+        }
+        </script>
+</body>
+</html>

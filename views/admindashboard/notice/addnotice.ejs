@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Notice - College Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            CKEDITOR.replace('noticeContent', {
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                    { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'insert', items: ['Image', 'Table'] },
+                    { name: 'tools', items: ['Maximize'] },
+                    { name: 'document', items: ['Source'] }
+                ]
+            });
+        });
+
+        function generateNoticeCode() {
+            const prefix = 'NOT';
+            const year = new Date().getFullYear();
+            const randomNum = Math.floor(100 + Math.random() * 900);
+            document.getElementById('noticeCode').value = `${prefix}-${year}-${randomNum}`;
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <%- include('../sidebar.ejs') %>
+
+        <!-- Main content -->
+        <div class="flex-1 overflow-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Add New Notice</h1>
+                    <a href="/notices" class="text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to Notices
+                    </a>
+                </div>
+
+                <!-- Notice Form -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <form action="/notices/add" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Notice Title -->
+                            <div class="md:col-span-2">
+                                <label for="noticeTitle" class="block text-sm font-medium text-gray-700 mb-1">Notice Title*</label>
+                                <input type="text" id="noticeTitle" name="noticeTitle" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                    placeholder="e.g., Mid-Term Examination Schedule">
+                            </div>
+
+                            <!-- Notice Code -->
+                            <div>
+                                <label for="noticeCode" class="block text-sm font-medium text-gray-700 mb-1">Notice Code</label>
+                                <div class="flex">
+                                    <input type="text" id="noticeCode" name="noticeCode"
+                                        class="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        placeholder="Auto-generated" readonly>
+                                    <button type="button" onclick="generateNoticeCode()" class="px-3 py-2 bg-gray-200 border border-l-0 rounded-r-lg hover:bg-gray-300">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category*</label>
+                                <select id="category" name="category" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    <option value="">Select Category</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Examination">Examination</option>
+                                    <option value="Event">Event</option>
+                                    <option value="General">General</option>
+                                    <option value="Admission">Admission</option>
+                                    <option value="Scholarship">Scholarship</option>
+                                </select>
+                            </div>
+
+                            <!-- Publish Date -->
+                            <div>
+                                <label for="publishDate" class="block text-sm font-medium text-gray-700 mb-1">Publish Date*</label>
+                                <input type="date" id="publishDate" name="publishDate" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+
+                            <!-- Expiry Date -->
+                            <div>
+                                <label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-1">Expiry Date*</label>
+                                <input type="date" id="expiryDate" name="expiryDate" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+
+                            <!-- Priority -->
+                            <div>
+                                <label for="priority" class="block text-sm font-medium text-gray-700 mb-1">Priority*</label>
+                                <select id="priority" name="priority" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    <option value="Normal">Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status*</label>
+                                <select id="status" name="status" required
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                    <option value="Draft">Draft</option>
+                                    <option value="Active" selected>Active</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
+                            </div>
+
+                            <!-- Target Audience -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Target Audience*</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    <div class="flex items-center">
+                                        <input id="allStudents" name="targetAudience" type="checkbox" value="All Students" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="allStudents" class="ml-2 block text-sm text-gray-700">All Students</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="faculty" name="targetAudience" type="checkbox" value="Faculty" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="faculty" class="ml-2 block text-sm text-gray-700">Faculty</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="staff" name="targetAudience" type="checkbox" value="Staff" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="staff" class="ml-2 block text-sm text-gray-700">Staff</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="specific" name="targetAudience" type="checkbox" value="Specific" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="specific" class="ml-2 block text-sm text-gray-700">Specific Groups</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notice Content -->
+                            <div class="md:col-span-2">
+                                <label for="noticeContent" class="block text-sm font-medium text-gray-700 mb-1">Notice Content*</label>
+                                <textarea id="noticeContent" name="noticeContent" rows="10"
+                                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+                            </div>
+
+                            <!-- Attachments -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Attachments</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                                    <div class="space-y-1 text-center">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="attachments" class="relative cursor-pointer bg-white rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
+                                                <span>Upload files</span>
+                                                <input id="attachments" name="attachments" type="file" multiple class="sr-only">
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PDF, DOC, JPG up to 10MB each</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end space-x-4">
+                            <button type="reset" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                Reset
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <i class="fas fa-bell mr-2"></i>Publish Notice
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
