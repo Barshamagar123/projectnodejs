@@ -1,6 +1,8 @@
 const express=require("express")
 const app=express()
+const db=require("./database/db.js")
 app.set("views engine","ejs")
+app.use(express.urlencoded({ extended: true }));
 app.get("/",(request,response)=>{
     response.render("home.ejs")
 })
@@ -30,6 +32,23 @@ app.get("/results",(request,response)=>{
 })
 app.get("/addStudent",(request,response)=>{
     response.render("./admindashboard/student/addStudent.ejs")
+})
+app.post("/addStudent",async(request,response)=>{
+    const {firstname,lastname,email,phone,birth,gender,address,studentid,course,year,semester}=request.body
+await db.students.create({
+    firstname:firstname,
+    lastname:lastname,
+    email:email,
+    phone:phone,
+    birth:birth,
+    gender:gender,
+    address:address,
+    studentid:studentid,
+    course:course,
+    year:year,
+    semester:semester,
+})
+    response.send("added succesfully")
 })
 app.get("/admin",(request,response)=>{
     response.render("./admindashboard/layout.ejs")
