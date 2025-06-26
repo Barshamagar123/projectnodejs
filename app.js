@@ -77,6 +77,6 @@ app.get("/addnotice",(request,response)=>{
 app.get("/notice",(request,response)=>{
     response.render("./admindashboard/notice/displaynotice.ejs")
 })
-app.listen(4000,(request,respone)=>{
+app.listen(process.env.portnumber,(request,respone)=>{
     console.log("backend has started at port number 4000")
 })
