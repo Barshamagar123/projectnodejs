@@ -4,61 +4,17 @@ const {db, sequelize }=require("./database/db.js")
 app.set("views engine","ejs")
 const bcrypt= require("bcrypt")
 const jwt=require("jsonwebtoken")
+const { renderRegister, renderRegisterget, renderLogin, renderLoginPage } = require("./controller/registerController.js")
 app.use(express.urlencoded({ extended: true }));
 app.get("/",(request,response)=>{
     response.render("home.ejs")
 })
-app.get("/register",(request,response)=>{
-    response.render("./authentication/register.ejs")
-})
-app.post("/register", async (request, response) => {
-  try {
-    const { name, birth, gender, address, phone, email, password, confirmpassword, education, program } = request.body;
-    await db.registers.create({
-      name,
-      birth,
-      gender,
-      address,
-      phone,
-      email,
-      password: bcrypt.hashSync(password,10),
-      confirmpassword,
-      education,
-      program
-    });
-    response.send("added succesfully");
-  } catch (err) {
-    console.error(err); // This will show the real cause in your terminal
-    response.status(500).send("Error: " + err.message);
-  }
-});
-app.post("/login",async(request,response)=>{
-    const{email,password,confirmpassword}=request.body
-    const registers = await db.registers.findAll({
-        where:{
-            email:email
-        }
-    })
-    if(registers.length==0){
-        response.send("not registered email")
-    }
-    else{
-        const isPasswordMatch=bcrypt.compareSync(password,registers[0].password)
-        if(isPasswordMatch){
-            const token=jwt.sign({name:"barsha"},"thisisascretkey",{
-                expiresIn: "20days"
-            })
-            response.cookie("token",token)
-            response.redirect("/")
-        }
-        else{
-            response.send("invalid credentails")
-        }
-    }
-})
-app.get("/login",(request,response)=>{
-    response.render("./authentication/login.ejs")
-})
+app.get("/register",renderRegisterget)
+app.post("/register", renderRegister)
+
+app.post("/login",renderLogin)
+app.get("/login",renderLoginPage)
+
 app.get("/dashboard",(request,response)=>{
     response.render("./studentdashboard/layout.ejs")
 })
