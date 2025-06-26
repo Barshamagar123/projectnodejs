@@ -124,6 +124,15 @@ app.get("/addEvents",(request,response)=>{
 app.get("/addnotice",(request,response)=>{
     response.render("./admindashboard/notice/addnotice.ejs")
 })
+app.get("/addgallery",(request,response)=>{
+    response.render("./admindashboard/gallerymgmt/addgalary.ejs")
+})
+app.get("/displaygallery",(request,response)=>{
+    response.render("./admindashboard/gallerymgmt/displaygallery.ejs")
+})
+app.get("/gallery",(request,response)=>{
+    response.render("./pages/gallery.ejs")
+})
 app.get("/notice",(request,response)=>{
     response.render("./admindashboard/notice/displaynotice.ejs")
 })
