@@ -28,8 +28,13 @@ app.get("/students",async (request,response)=>{
     const datas=await db.students.findAll()
     response.render("./admindashboard/student/display.ejs",{hotels:datas})
 })
-app.get("/studentprofile",async(request,response)=>{
-     const datas=await db.students.findAll()
+app.get("/studentprofile/:id",async(request,response)=>{
+        const id=request.params.id
+     const datas=await db.students.findAll({
+        where:{
+            id:id
+        }
+     })
       response.render("./studentdashboard/stuprofile.ejs",{hotels:datas})
 })
 app.get("/departments",async(request,response)=>{
