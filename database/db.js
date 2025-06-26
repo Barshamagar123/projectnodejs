@@ -20,7 +20,7 @@ const db={}
 db.students=require("./../model/studentAdd")(sequelize,DataTypes)
 db.departments=require("./../model/departmentAdd")(sequelize,DataTypes)
 db.registers=require(".././model/registerMode")(sequelize,DataTypes)
-sequelize.sync({alter:true}).then(()=>{
+sequelize.sync({async:true}).then(()=>{
     console.log("migrated succesfully")
 })
 

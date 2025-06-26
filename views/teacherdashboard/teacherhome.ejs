@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TU Faculty Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tu-blue': '#1E3A8A',
+                        'tu-light-blue': '#3B82F6',
+                        'tu-gold': '#F59E0B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 80px;
+        }
+        .sidebar-collapsed .nav-text {
+            display: none;
+        }
+        .sidebar-collapsed .logo-text {
+            display: none;
+        }
+        .sidebar-collapsed .profile-name {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <div id="sidebar" class="w-64 bg-tu-blue text-white p-4 transition-all duration-300 flex flex-col">
+            <div class="flex items-center space-x-2 p-4 mb-8 border-b border-blue-700">
+                <img src="https://www.tu.edu.np/wp-content/uploads/2020/07/cropped-TU-Logo-1-32x32.png" alt="TU Logo" class="h-10">
+                <span class="font-bold text-lg logo-text">TU Faculty Portal</span>
+            </div>
+            
+            <nav class="flex-1">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800 bg-blue-800">
+                            <i class="fas fa-tachometer-alt w-6 text-center"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-calendar-alt w-6 text-center"></i>
+                            <span class="nav-text">Class Routine</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-book w-6 text-center"></i>
+                            <span class="nav-text">Teaching Materials</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-clipboard-check w-6 text-center"></i>
+                            <span class="nav-text">Attendance</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-graduation-cap w-6 text-center"></i>
+                            <span class="nav-text">Grading</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-envelope w-6 text-center"></i>
+                            <span class="nav-text">Communication</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-file-alt w-6 text-center"></i>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-3 rounded hover:bg-blue-800">
+                            <i class="fas fa-calendar-minus w-6 text-center"></i>
+                            <span class="nav-text">Leave Management</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="mt-auto pt-4 border-t border-blue-700">
+                <div class="flex items-center space-x-3 p-3 rounded hover:bg-blue-800 cursor-pointer">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="h-10 w-10 rounded-full">
+                    <div>
+                        <p class="font-medium profile-name">Prof. Ram Sharma</p>
+                        <p class="text-xs text-blue-200 profile-name">Computer Science</p>
+                    </div>
+                    <button id="toggle-sidebar" class="ml-auto text-blue-300 hover:text-white">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Top Bar -->
+            <header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
+                <div class="flex items-center space-x-4">
+                    <button id="mobile-menu-button" class="md:hidden text-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-xl md:text-2xl font-bold text-tu-blue">Faculty Dashboard</h1>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative hidden md:block">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    
+                    <div class="relative">
+                        <i class="fas fa-bell text-gray-600 text-xl cursor-pointer hover:text-tu-blue"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">3</span>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2 cursor-pointer group">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="h-10 w-10 rounded-full border-2 border-transparent group-hover:border-tu-blue">
+                        <span class="font-medium hidden md:inline">Prof. Sharma</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-4 md:p-6">
+                <!-- Welcome Card -->
+                <div class="bg-gradient-to-r from-tu-blue to-blue-600 text-white rounded-xl p-6 mb-6 shadow-lg">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                        <div class="mb-4 md:mb-0">
+                            <h2 class="text-2xl font-bold mb-2">Welcome Back, Professor Sharma</h2>
+                            <p class="mb-4">Today is Wednesday, June 26, 2025</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition flex items-center space-x-2">
+                                <i class="fas fa-upload"></i>
+                                <span>Upload Materials</span>
+                            </button>
+                            <button class="px-4 py-2 bg-tu-gold rounded-lg hover:bg-yellow-600 transition flex items-center space-x-2">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span>Take Attendance</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                            <p class="text-sm">Current Semester</p>
+                            <p class="font-bold text-lg">Fourth Semester</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                            <p class="text-sm">Classes Today</p>
+                            <p class="font-bold text-lg">2</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                            <p class="text-sm">Pending Grading</p>
+                            <p class="font-bold text-lg">12</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                            <p class="text-sm">Unread Messages</p>
+                            <p class="font-bold text-lg">5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-tu-blue hover:shadow-lg transition cursor-pointer">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-upload text-tu-blue"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Upload Materials</h3>
+                                <p class="text-sm text-gray-500">Share notes with students</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-green-500 hover:shadow-lg transition cursor-pointer">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-clipboard-check text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Take Attendance</h3>
+                                <p class="text-sm text-gray-500">Mark today's presence</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition cursor-pointer">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <i class="fas fa-graduation-cap text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Enter Grades</h3>
+                                <p class="text-sm text-gray-500">Submit internal marks</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-tu-gold hover:shadow-lg transition cursor-pointer">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <i class="fas fa-calendar-minus text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Request Leave</h3>
+                                <p class="text-sm text-gray-500">Submit leave application</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Today's Schedule -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-tu-blue">Today's Schedule</h2>
+                            <button class="text-tu-light-blue hover:text-tu-blue text-sm font-medium">View Full Routine</button>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border rounded-lg hover:bg-blue-50 transition">
+                                <div class="mb-2 sm:mb-0">
+                                    <p class="font-medium">BSc. CSIT - 4th Sem</p>
+                                    <p class="text-sm text-gray-500">Database Management System</p>
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-2 sm:space-y-0">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <i class="fas fa-clock mr-2"></i>
+                                        <span>10:00 AM - 11:30 AM</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="px-3 py-1 bg-blue-100 text-tu-blue rounded-full text-sm hover:bg-blue-200 transition">
+                                            Take Attendance
+                                        </button>
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">
+                                            Materials
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border rounded-lg hover:bg-blue-50 transition">
+                                <div class="mb-2 sm:mb-0">
+                                    <p class="font-medium">BSc. CSIT - 6th Sem</p>
+                                    <p class="text-sm text-gray-500">Artificial Intelligence</p>
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-2 sm:space-y-0">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <i class="fas fa-clock mr-2"></i>
+                                        <span>1:00 PM - 2:30 PM</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="px-3 py-1 bg-blue-100 text-tu-blue rounded-full text-sm hover:bg-blue-200 transition">
+                                            Take Attendance
+                                        </button>
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">
+                                            Materials
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 border rounded-lg bg-gray-50 text-center">
+                                <p class="text-gray-500">No more classes scheduled for today</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-tu-blue">Notifications</h2>
+                            <button class="text-tu-light-blue hover:text-tu-blue text-sm font-medium">View All</button>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
+                                    <i class="fas fa-calendar-check text-tu-blue"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Exam Schedule Updated</p>
+                                    <p class="text-sm text-gray-500">4th Semester exams start on June 15</p>
+                                    <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50">
+                                <div class="bg-green-100 p-2 rounded-full flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Leave Approved</p>
+                                    <p class="text-sm text-gray-500">Your leave request for June 10 has been approved</p>
+                                    <p class="text-xs text-gray-400 mt-1">Yesterday</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50">
+                                <div class="bg-red-100 p-2 rounded-full flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Attendance Reminder</p>
+                                    <p class="text-sm text-gray-500">You haven't submitted attendance for 2nd Sem today</p>
+                                    <p class="text-xs text-gray-400 mt-1">5 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 bg-white rounded-lg hover:bg-gray-50">
+                                <div class="bg-purple-100 p-2 rounded-full flex-shrink-0">
+                                    <i class="fas fa-file-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">New Assignment Submitted</p>
+                                    <p class="text-sm text-gray-500">12 students submitted DBMS assignment</p>
+                                    <p class="text-xs text-gray-400 mt-1">1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts and Reports -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Attendance Summary -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-tu-blue">Attendance Summary</h2>
+                            <select class="border rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <option>Current Semester</option>
+                                <option>Last Semester</option>
+                                <option>All Time</option>
+                            </select>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Grading Progress -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-tu-blue">Grading Progress</h2>
+                            <select class="border rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <option>Current Semester</option>
+                                <option>Last Semester</option>
+                            </select>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="gradingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Materials -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-tu-blue">Recent Teaching Materials</h2>
+                        <button class="text-tu-light-blue hover:text-tu-blue text-sm font-medium">View All</button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Semester</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                            <div class="text-sm font-medium text-gray-900">DBMS Chapter 3 Notes</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Database Management</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4th Sem</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">June 24, 2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-tu-blue hover:text-tu-light-blue mr-3">View</a>
+                                        <a href="#" class="text-green-600 hover:text-green-800">Update</a>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar
+        const toggleSidebar = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-collapsed');
+        });
+        
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attendance Chart
+            const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(attendanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Attendance Percentage',
+                        data: [85, 79, 88, 91, 76, 82],
+                        backgroundColor: '#3B82F6',
+                        borderColor: '#1E3A8A',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Grading Chart
+            const gradingCtx = document.getElementById('gradingChart').getContext('2d');
+            const gradingChart = new Chart(gradingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Submitted', 'Pending', 'Overdue'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: [
+                            '#10B981',
+                            '#F59E0B',
+                            '#EF4444'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

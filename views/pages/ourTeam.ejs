@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Team | Itahari Namuna College of Hotel Management</title>
+    <style>
+        :root {
+            --primary: #8B0000; /* Burgundy - Hotel Management theme */
+            --secondary: #F5F5DC; /* Beige */
+            --accent: #D4AF37; /* Gold */
+            --text: #333333;
+        }
+        
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(139, 0, 0, 0.9)), 
+                        url('hotel-management-banner.jpg');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .faculty-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .faculty-img {
+            height: 220px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .faculty-info {
+            padding: 20px;
+        }
+        
+        .faculty-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .faculty-position {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .faculty-department {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--text);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        
+        .faculty-contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Our Faculty Team</h1>
+            <p class="subtitle">Meet the experienced professionals guiding our Hotel Management students</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <section class="team-section">
+            <h2 class="section-title">Department Leadership</h2>
+            <div class="team-grid">
+                <!-- HOD -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('hod-shalikdutta.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">Mr. Shalik Dutta</h3>
+                        <p class="faculty-position">Head of Department</p>
+                        <span class="faculty-department">Hotel Management</span>
+                        <p>With over 15 years of experience in the hospitality industry, Mr. Dutta leads our department with expertise in hotel operations and management.</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                shalik.dutta@itaharanamuna.edu.np
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                +977 9841XXXXXX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <h2 class="section-title">Specialized Instructors</h2>
+            <div class="team-grid">
+                <!-- Food and Beverage -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('food-beverage-teacher.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">Mr. [Name]</h3>
+                        <p class="faculty-position">Food & Beverage Instructor</p>
+                        <span class="faculty-department">Kitchen Operations</span>
+                        <p>Specialist in food production, beverage management, and restaurant operations with extensive industry experience.</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                f&b@itaharanamuna.edu.np
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Housekeeping -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('sangit-housekeeping.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">Mr. Sangit [Lastname]</h3>
+                        <p class="faculty-position">Housekeeping & Front Office Instructor</p>
+                        <span class="faculty-department">Rooms Division</span>
+                        <p>Expert in housekeeping operations, front office management, and guest relations training.</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                sangit@itaharanamuna.edu.np
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account and Finance -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('sanjiv-basnet.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">Mr. Sanjiv Basnet</h3>
+                        <p class="faculty-position">Accounts & Finance Instructor</p>
+                        <span class="faculty-department">Hotel Finance</span>
+                        <p>Specializes in hospitality accounting, cost control, and financial management for hotels.</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                sanjiv.basnet@itaharanamuna.edu.np
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('diwas-english.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">Mr. Diwas [Lastname]</h3>
+                        <p class="faculty-position">English Language Instructor</p>
+                        <span class="faculty-department">Communication</span>
+                        <p>Focuses on hospitality English, communication skills, and customer service language training.</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                diwas@itaharanamuna.edu.np
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <h2 class="section-title">Support Staff</h2>
+            <div class="team-grid">
+                <!-- Add your support staff here following the same card pattern -->
+                <!-- Example: -->
+                <div class="faculty-card">
+                    <div class="faculty-img" style="background-image: url('support-staff.jpg');"></div>
+                    <div class="faculty-info">
+                        <h3 class="faculty-name">[Support Staff Name]</h3>
+                        <p class="faculty-position">[Position]</p>
+                        <span class="faculty-department">[Department]</span>
+                        <p>[Brief description of their role]</p>
+                        <div class="faculty-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                email@itaharanamuna.edu.np
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-text">
+            <p>Itahari Namuna College of Hotel Management | Shantinagar, Itahari, Sunsari, Nepal</p>
+            <p>Phone: +977 025-580XXX | Email: info@itaharanamuna.edu.np</p>
+        </div>
+    </footer>
+</body>
+</html>

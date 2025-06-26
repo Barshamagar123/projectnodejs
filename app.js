@@ -1,11 +1,14 @@
 const express=require("express")
 const app=express()
+const {multer,storage}=require('./middleware/multerConfig.js')
 const {db, sequelize }=require("./database/db.js")
 app.set("views engine","ejs")
+const upload = multer({storage:storage})
 const bcrypt= require("bcrypt")
 const jwt=require("jsonwebtoken")
 const { renderRegister, renderRegisterget, renderLogin, renderLoginPage } = require("./controller/registerController.js")
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("./storage/"))
 app.get("/",(request,response)=>{
     response.render("home.ejs")
 })
@@ -17,6 +20,9 @@ app.get("/login",renderLoginPage)
 
 app.get("/dashboard",(request,response)=>{
     response.render("./studentdashboard/layout.ejs")
+})
+app.get("/team",(request,response)=>{
+    response.render("./pages/ourTeam.ejs")
 })
 app.get("/students",async (request,response)=>{
     const datas=await db.students.findAll()
@@ -62,9 +68,9 @@ app.get("/results",(request,response)=>{
 app.get("/addStudent",(request,response)=>{
     response.render("./admindashboard/student/addStudent.ejs")
 })
-app.post("/addStudent",async(request,response)=>{
-    // console.log(request.body)
-    const {firstname,lastname,email,phone,birth,gender,address,image,studentid,course,year,semester}=request.body
+app.post("/addStudent",upload.single('image'),async(request,response)=>{
+
+    const {firstname,lastname,email,phone,birth,gender,address,studentid,course,year,semester}=request.body
 await db.students.create({
     firstname:firstname,
     lastname:lastname,
@@ -73,7 +79,7 @@ await db.students.create({
     birth:birth,
     gender:gender,
     address:address,
-    image:image,
+    image:process.env.backendUrl + request.file.filename,
     studentid:studentid,
     course:course,
     year:year,
@@ -81,14 +87,20 @@ await db.students.create({
 })
     response.send("added succesfully")
 })
+app.get("/teacherdashboad",(request,response)=>{
+    response.render("./teacherdashboard/teacherhome.ejs")
+})
 app.get("/admin",(request,response)=>{
     response.render("./admindashboard/layout.ejs")
 })
-app.get("/team",(request,response)=>{
+app.get("/adminteam",(request,response)=>{
     response.render("./admindashboard/team/displayTeam.ejs")
 })
 app.get("/addTeam",(request,response)=>{
     response.render("./admindashboard/team/addTeam.ejs")
+})
+app.get("/teacherdashboard",(request,response)=>{
+    response.render("./teacherdashboard/teacherhome.ejs")
 })
 app.get("/addCourse",(request,response)=>{
     response.render("./admindashboard/course/addCourse.ejs")
