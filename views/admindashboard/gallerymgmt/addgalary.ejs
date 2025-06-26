@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Gallery Item - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+         <%- include('../sidebar.ejs') %>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Add Gallery Item</h1>
+                    <a href="/displaygallery" class="text-primary-600 hover:text-primary-800 flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Gallery
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <form action="/admin/gallery/add" method="POST" enctype="multipart/form-data" class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Left Column -->
+                            <div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                        Title <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="title" name="title" required
+                                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                                        Category <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="category" name="category" required
+                                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                        <option value="">Select Category</option>
+                                        <option value="Events">Events</option>
+                                        <option value="Campus">Campus</option>
+                                        <option value="Students">Students</option>
+                                        <option value="Activities">Activities</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="date">
+                                        Date <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="date" id="date" name="date" required
+                                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+                                        Image <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                        <div id="image-preview" class="hidden mb-2">
+                                            <img id="preview" class="max-h-40 mx-auto">
+                                        </div>
+                                        <input type="file" id="image" name="image" accept="image/*" required
+                                            class="hidden" onchange="previewImage(this)">
+                                        <label for="image" class="cursor-pointer">
+                                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                            <p class="text-sm text-gray-500">Click to upload or drag and drop</p>
+                                            <p class="text-xs text-gray-400">JPEG, PNG (Max 5MB)</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                                Description
+                            </label>
+                            <textarea id="description" name="description" rows="4"
+                                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+                        </div>
+
+                        <div class="flex justify-end space-x-3">
+                            <button type="reset" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                                Reset
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg">
+                                Save Gallery Item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('preview');
+            const imagePreview = document.getElementById('image-preview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

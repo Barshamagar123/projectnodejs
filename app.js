@@ -136,6 +136,17 @@ app.get("/gallery",(request,response)=>{
 app.get("/notice",(request,response)=>{
     response.render("./admindashboard/notice/displaynotice.ejs")
 })
-app.listen(process.env.portnumber,(request,respone)=>{
+app.post("addgallery",async(request,response)=>{
+    const {title,image,category,date,description}=request.body
+ await db.gallerys.create({
+    title:title,
+    image:image,
+    category:category,
+    date:date,
+    description:description
+ })
+ response.send("added successfully")
+})
+app.listen(4000,(request,respone)=>{
     console.log("backend has started at port number 4000")
 })

@@ -6,7 +6,6 @@ const sequelize = new Sequelize({
     password: process.env.password,
     host: process.env.host,
     port:process.env.port,
-    
     dialect: "mysql"
 });
 
@@ -22,6 +21,7 @@ const db = {};
 db.students = require("./../model/studentAdd")(sequelize, DataTypes);
 db.departments = require("./../model/departmentAdd")(sequelize, DataTypes);
 db.registers = require(".././model/registerMode")(sequelize, DataTypes);
+db.gallerys=require(".././model/galleryModel")(sequelize,DataTypes)
 
 // Define associations BEFORE sync
 db.registers.hasMany(db.students);

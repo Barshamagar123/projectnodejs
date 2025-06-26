@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - College Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gallery-item {
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="flex">
+ <%- include('../sidebar.ejs') %>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800">College Gallery</h1>
+          <a href="/addgallery" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
+            <i class="fas fa-plus mr-2"></i>Add New
+          </a>
+        </div>
+
+        <!-- Filter Options -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+          <div class="flex flex-wrap items-center gap-4">
+            <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option>All Categories</option>
+              <option>Events</option>
+              <option>Campus</option>
+              <option>Students</option>
+              <option>Activities</option>
+            </select>
+            <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option>Sort By: Newest</option>
+              <option>Sort By: Oldest</option>
+              <option>Sort By: Popular</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="lightgallery">
+          <div class="gallery-item bg-white rounded-lg overflow-hidden shadow" data-src="https://source.unsplash.com/400x300/?college,1" data-sub-html="College Event 1">
+            <img src="https://source.unsplash.com/400x300/?college,1" alt="Event 1" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="font-semibold text-lg mb-1">Annual Function</h3>
+              <p class="text-gray-600 text-sm mb-2">Events</p>
+              <div class="flex justify-between items-center text-sm text-gray-500">
+                <span>2025-06-10</span>
+                <div class="flex space-x-2">
+                  <a href="#" class="text-blue-500 hover:text-blue-700">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="#" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item bg-white rounded-lg overflow-hidden shadow" data-src="https://source.unsplash.com/400x300/?college,2" data-sub-html="College Event 2">
+            <img src="https://source.unsplash.com/400x300/?college,2" alt="Event 2" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="font-semibold text-lg mb-1">Campus Life</h3>
+              <p class="text-gray-600 text-sm mb-2">Campus</p>
+              <div class="flex justify-between items-center text-sm text-gray-500">
+                <span>2025-05-22</span>
+                <div class="flex space-x-2">
+                  <a href="#" class="text-blue-500 hover:text-blue-700">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="#" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add more static gallery items if needed -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+          <nav class="inline-flex rounded-md shadow">
+            <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+            <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">1</a>
+            <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">2</a>
+            <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">3</a>
+            <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightgallery JS -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+  <script>
+    lightGallery(document.getElementById('lightgallery'), {
+      selector: '.gallery-item',
+      download: false,
+      share: false
+    });
+  </script> -->
+</body>
+</html>
