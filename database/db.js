@@ -18,9 +18,12 @@ sequelize.authenticate()
 )
 const db={}
 db.students=require("./../model/studentAdd")(sequelize,DataTypes)
+db.departments=require("./../model/departmentAdd")(sequelize,DataTypes)
+db.registers=require(".././model/registerMode")(sequelize,DataTypes)
 sequelize.sync({alter:true}).then(()=>{
     console.log("migrated succesfully")
 })
+
 sequelize.authenticate()
 .then(()=>{
     console.log("connected succesfully")
@@ -29,5 +32,4 @@ sequelize.authenticate()
     console.log("error occurs",err)
 })
 
-module.exports=db
-module.exports=sequelize
+module.exports={db, sequelize}

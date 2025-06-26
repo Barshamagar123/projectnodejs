@@ -1,31 +1,29 @@
 const makeStudentAdd = (sequelize, DataTypes) => {
-    const student = sequelize.define("student", {
+    const student = sequelize.define("students", {
         firstname: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         lastname: {
             type: DataTypes.STRING,
-            allowNull: false
+            
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
+        
             validate: {
                 isEmail: true
             }
         },
         phone: {
             type: DataTypes.STRING,
-            allowNull: false
+          
         },
         birth: {
             type: DataTypes.DATEONLY,
-            allowNull: false
         },
         gender: {
             type: DataTypes.ENUM("female", "male", "others"),
-            allowNull: false
+         
         },
         address: {
             type: DataTypes.STRING
@@ -36,15 +34,17 @@ const makeStudentAdd = (sequelize, DataTypes) => {
         },
         course: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         year: {
             type: DataTypes.ENUM("first year", "second year", "third year", "fourth year"),
-            allowNull: false
+            
         },
         semester: {
             type: DataTypes.ENUM("first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"),
-            allowNull: false
+        
+        },
+        image:{
+            type: DataTypes.STRING,
         }
     });
 

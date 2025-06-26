@@ -79,7 +79,7 @@
                 Full Name
               </label>
               <div class="mt-1">
-                <input id="fullname" name="fullname" type="text" required 
+                <input id="fullname" name="name" type="text" required 
                   class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
               </div>
             </div>
@@ -90,7 +90,7 @@
                   Date of Birth
                 </label>
                 <div class="mt-1">
-                  <input id="dob" name="dob" type="date" required 
+                  <input id="dob" name="birth" type="date" required 
                     class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 </div>
               </div>
@@ -124,7 +124,7 @@
           <!-- Contact Information -->
           <div class="form-section">
             <h4 class="form-section-title">Contact Information</h4>
-            <div>
+            <!-- <div>
               <label for="email" class="block text-sm font-medium text-gray-700">
                 Email address
               </label>
@@ -132,7 +132,7 @@
                 <input id="email" name="email" type="email" autocomplete="email" required 
                   class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
               </div>
-            </div>
+            </div> -->
 
             <div class="mt-4">
               <label for="phone" class="block text-sm font-medium text-gray-700">
@@ -149,6 +149,15 @@
           <div class="form-section">
             <h4 class="form-section-title">Account Information</h4>
             <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
+              <div class="mt-1">
+                <input id="email" name="email" type="email" autocomplete="email" required 
+                  class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              </div>
+            </div>
+            <div>
               <label for="password" class="block text-sm font-medium text-gray-700">
                 Password
               </label>
@@ -163,7 +172,7 @@
                 Confirm Password
               </label>
               <div class="mt-1">
-                <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required 
+                <input id="confirm_password" name="confirmpassword" type="password" autocomplete="new-password" required 
                   class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
               </div>
             </div>
@@ -193,7 +202,7 @@
                 Program Selection
               </label>
               <div class="mt-1">
-                <select id="course" name="course" 
+                <select id="course" name="program" 
                   class="input-hover appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                   <option value="">Select a program</option>
                   <option value="diploma">Diploma in Hotel Management</option>
