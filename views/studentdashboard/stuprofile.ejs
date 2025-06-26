@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Profile - TU Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Tailwind Custom Colors -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            secondary: {
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .profile-header {
+      background: linear-gradient(to right, #6d28d9, #7c3aed);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <div class="flex min-h-screen">
+    <%- include('sidebar.ejs') %>
+
+    <main class="flex-1 p-6">
+           <% hotels.forEach(function(student) { %>
+      <!-- Profile Header -->
+      <header class="profile-header text-white rounded-xl p-6 shadow-lg mb-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="relative">
+              <img src="<%- student.image %>" alt="Student"
+                   class="w-24 h-24 rounded-full border-4 border-white shadow-md" />
+              <span class="absolute bottom-1 right-1 bg-green-500 border-2 border-white rounded-full w-5 h-5"></span>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold"><%- student.firstname %></h1>
+              <p class="text-sm text-primary-200 mt-1"><%- student.year %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </header>
+     <% hotels.forEach(function(student) { %>
+      <!-- Stat Cards -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-primary-600">
+          <p class="text-sm text-gray-500">Student ID</p>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-lg font-bold"><%- student.studentid %></span>
+            <i class="fas fa-id-card text-primary-600 text-xl"></i>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-green-500">
+          <p class="text-sm text-gray-500">Attendance</p>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-lg font-bold">88%</span>
+            <i class="fas fa-clipboard-check text-green-500 text-xl"></i>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-blue-500">
+          <p class="text-sm text-gray-500">CGPA</p>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-lg font-bold">3.42</span>
+            <i class="fas fa-star text-blue-500 text-xl"></i>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-yellow-500">
+          <p class="text-sm text-gray-500">Credits</p>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-lg font-bold">102/120</span>
+            <i class="fas fa-award text-yellow-500 text-xl"></i>
+          </div>
+        </div>
+      </section>
+<% }) %>
+      <!-- Profile Info -->
+        <% hotels.forEach(function(student) { %>
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Personal Info -->
+        <div class="bg-white rounded-xl shadow col-span-2">
+          <div class="bg-primary-700 text-white p-4 rounded-t-xl">
+            <h2 class="text-lg font-semibold">Personal Information</h2>
+          </div>
+          <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div><p class="text-gray-500">Full Name</p><p class="font-medium"><%- student.firstname %></p></div>
+            <div><p class="text-gray-500">Date of Birth</p><p class="font-medium"><%- student.birth %></p></div>
+            <div><p class="text-gray-500">Gender</p><p class="font-medium"><%- student.gender %></p></div>
+            <div><p class="text-gray-500">Contact</p><p class="font-medium"><%- student.phone %>/p></div>
+            <div class="md:col-span-2"><p class="text-gray-500">Email</p><p class="font-medium"><%- student.email %></p></div>
+            <div class="md:col-span-2"><p class="text-gray-500">Address</p><p class="font-medium"><%- student.address %></p></div>
+          </div>
+        </div>
+        <% }) %>
+
+        <!-- Academic Info -->
+        <div class="bg-white rounded-xl shadow">
+          <div class="bg-primary-700 text-white p-4 rounded-t-xl">
+            <h2 class="text-lg font-semibold">Academic Information</h2>
+          </div>
+          <div class="p-4 space-y-4 text-sm">
+            <div><p class="text-gray-500">Program</p><p class="font-medium">BHM (Bachelor of Hotel Management)</p></div>
+            <div><p class="text-gray-500">Batch</p><p class="font-medium">2020</p></div>
+            <div><p class="text-gray-500">Semester</p><p class="font-medium">8th (Final)</p></div>
+            <div><p class="text-gray-500">Advisor</p><p class="font-medium">Prof. Rajesh Shrestha</p></div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ app.post("/register", renderRegister)
 app.post("/login",renderLogin)
 app.get("/login",renderLoginPage)
 
-app.get("/dashboard",(request,response)=>{
+app.get("/studentdashboard",(request,response)=>{
     response.render("./studentdashboard/layout.ejs")
 })
 app.get("/team",(request,response)=>{
@@ -30,7 +30,7 @@ app.get("/students",async (request,response)=>{
 })
 app.get("/studentprofile",async(request,response)=>{
      const datas=await db.students.findAll()
-      response.render("./studentdashboard/profile.ejs",{hotels:datas})
+      response.render("./studentdashboard/stuprofile.ejs",{hotels:datas})
 })
 app.get("/departments",async(request,response)=>{
     const datas=await db.departments.findAll()
@@ -69,7 +69,7 @@ app.get("/addStudent",(request,response)=>{
     response.render("./admindashboard/student/addStudent.ejs")
 })
 app.post("/addStudent",upload.single('image'),async(request,response)=>{
-
+    
     const {firstname,lastname,email,phone,birth,gender,address,studentid,course,year,semester}=request.body
 await db.students.create({
     firstname:firstname,
@@ -84,6 +84,7 @@ await db.students.create({
     course:course,
     year:year,
     semester:semester,
+    
 })
     response.send("added succesfully")
 })
@@ -93,6 +94,7 @@ app.get("/teacherdashboad",(request,response)=>{
 app.get("/admin",(request,response)=>{
     response.render("./admindashboard/layout.ejs")
 })
+
 app.get("/adminteam",(request,response)=>{
     response.render("./admindashboard/team/displayTeam.ejs")
 })
