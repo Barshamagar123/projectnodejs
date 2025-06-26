@@ -1,233 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hotel Management System</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen">
-    <%- include('./partials/navbar.ejs') %>
-  <!-- Hero Section -->
-  <section class="relative h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div 
-      class="absolute inset-0 bg-cover bg-center"
-      style="background-image: url('/assets/cover.jpeg')"
-    ></div>
-    
-    <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-        Shape Your Future in Hospitality
-      </h1>
-      <p class="text-xl md:text-2xl text-white mb-8">
-        Premier hotel management education at Itahari Namuna College
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a 
-          href="/courses" 
-          class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300"
-        >
-          Explore Courses
-        </a>
-        <a 
-          href="/contact" 
-          class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-medium rounded-lg transition duration-300"
-        >
-          Contact Us
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center p-6 bg-white rounded-lg shadow-md">
-          <p class="text-4xl font-bold text-blue-600 mb-2"><span id="yearsExp">0</span>+</p>
-          <p class="text-lg text-gray-700">Years Experience</p>
-        </div>
-        <div class="text-center p-6 bg-white rounded-lg shadow-md">
-          <p class="text-4xl font-bold text-blue-600 mb-2"><span id="graduates">0</span>+</p>
-          <p class="text-lg text-gray-700">Graduates</p>
-        </div>
-        <div class="text-center p-6 bg-white rounded-lg shadow-md">
-          <p class="text-4xl font-bold text-blue-600 mb-2"><span id="partners">0</span>+</p>
-          <p class="text-lg text-gray-700">Industry Partners</p>
-        </div>
-        <div class="text-center p-6 bg-white rounded-lg shadow-md">
-          <p class="text-4xl font-bold text-blue-600 mb-2"><span id="instructors">0</span>+</p>
-          <p class="text-lg text-gray-700">Certified Instructors</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Courses Section -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12">Our Featured Programs</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
-          <div class="h-48 bg-gray-300 bg-cover bg-center" 
-               style="background-image: url('/images/course-diploma.jpg')">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">Diploma in Hotel Management</h3>
-            <p class="text-gray-600 mb-4">2 Years • Practical-focused curriculum</p>
-            <a 
-              href="/courses/1" 
-              class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
-            >
-              Learn more
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
-          <div class="h-48 bg-gray-300 bg-cover bg-center" 
-               style="background-image: url('/images/course-bachelor.jpg')">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">BHM Program</h3>
-            <p class="text-gray-600 mb-4">4 Years • With internship opportunities</p>
-            <a 
-              href="/courses/2" 
-              class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
-            >
-              Learn more
-              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="py-16 bg-gray-100">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-12">What Our Students Say</h2>
-      <div class="relative">
-        <div id="testimonial1" class="opacity-100">
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="flex items-center mb-6">
-              <img 
-                src="/images/student1.jpg" 
-                alt="Anita Shrestha" 
-                class="w-16 h-16 rounded-full object-cover mr-4"
-              />
-              <div>
-                <h4 class="font-bold text-lg">Anita Shrestha</h4>
-                <p class="text-gray-600">BHM Graduate, 2022</p>
-              </div>
-            </div>
-            <p class="text-gray-700 italic">"The practical training at INC gave me the confidence to excel at my job at Hyatt Regency."</p>
-          </div>
-        </div>
-        <div id="testimonial2" class="opacity-0 absolute top-0 left-0">
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="flex items-center mb-6">
-              <img 
-                src="/images/student2.jpg" 
-                alt="Rohan Karki" 
-                class="w-16 h-16 rounded-full object-cover mr-4"
-              />
-              <div>
-                <h4 class="font-bold text-lg">Rohan Karki</h4>
-                <p class="text-gray-600">Diploma Student</p>
-              </div>
-            </div>
-            <p class="text-gray-700 italic">"The industry exposure and guest lectures from hotel managers are invaluable."</p>
-          </div>
-        </div>
-        <div class="flex justify-center mt-8 space-x-2">
-          <button
-            onclick="showTestimonial(0)"
-            class="w-3 h-3 rounded-full bg-blue-600"
-            aria-label="Go to testimonial 1"
-          ></button>
-          <button
-            onclick="showTestimonial(1)"
-            class="w-3 h-3 rounded-full bg-gray-300"
-            aria-label="Go to testimonial 2"
-          ></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-blue-700 text-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-6">Ready to Start Your Hospitality Journey?</h2>
-      <p class="text-xl mb-8">Join our next intake and take the first step toward an exciting career in hotel management.</p>
-      <a 
-        href="/apply" 
-        class="inline-block px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition duration-300"
-      >
-        Apply Now
-      </a>
-    </div>
-  </section>
-
-  <script>
-    // Animate statistics
-    function animateValue(id, start, end, duration) {
-      let startTimestamp = null;
-      const element = document.getElementById(id);
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.innerHTML = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itahari Namuna College - Hotel Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        secondary: {
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        }
+                    }
+                }
+            }
         }
-      };
-      window.requestAnimationFrame(step);
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .dropdown-enter {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        .dropdown-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.2s ease-out;
+        }
+        
+        .dropdown-exit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dropdown-exit-active {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.2s ease-in;
+        }
+        
+        .mobile-menu-enter {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu-enter-active {
+            opacity: 1;
+            max-height: 1000px;
+            transition: all 0.3s ease-out;
+        }
+        
+        .mobile-menu-exit {
+            opacity: 1;
+            max-height: 1000px;
+        }
+        
+        .mobile-menu-exit-active {
+            opacity: 0;
+            max-height: 0;
+            transition: all 0.3s ease-in;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-enter {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+        }
+        
+        .modal-enter-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.2s ease-out;
+        }
+        
+        .modal-exit {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-exit-active {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+            transition: all 0.2s ease-in;
+        }
+    </style>
+</head>
+<body class="font-sans">
+     <%- include('./partials/navbar.ejs') %>
+    <!-- Hero Section with Demo Video -->
+    <section class="relative bg-gradient-to-r from-primary-600 to-secondary-600 min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 w-full h-full flex items-center justify-center opacity-40 pointer-events-none">
+            <!-- Static Demo Video (replace src with your own video if available) -->
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="relative z-10 text-center text-white max-w-2xl mx-auto px-4 py-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Welcome to Itahari Namuna College</h1>
+            <p class="text-lg md:text-2xl font-medium mb-8 drop-shadow">Excellence in Hotel Management Education</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/apply" class="bg-gradient-to-r from-amber-400 to-amber-600 text-primary-900 font-bold px-8 py-3 rounded-lg shadow-lg hover:from-amber-500 hover:to-amber-700 transition">Apply Now</a>
+                <a href="#programs" class="bg-white/80 text-primary-700 font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-white transition">Explore Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50" id="about">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-primary-700 mb-4">About Our College</h2>
+                <p class="text-gray-700 mb-4">Itahari Namuna College is a premier institution dedicated to providing world-class education in Hotel Management. Our mission is to nurture future leaders in the hospitality industry through innovative teaching, practical training, and global exposure.</p>
+                <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                    <li>Experienced and passionate faculty</li>
+                    <li>Modern infrastructure and training labs</li>
+                    <li>Strong industry partnerships</li>
+                    <li>Focus on holistic student development</li>
+                </ul>
+            </div>
+            <div class="flex justify-center">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="College Building" class="rounded-xl shadow-lg w-full max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Overview -->
+    <section class="py-16 bg-white" id="programs">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">Our Programs</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-xl shadow-lg p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">+2 in Hotel Management</h3>
+                        <p class="mb-4">A comprehensive higher secondary program designed to introduce students to the fundamentals of hotel management and hospitality.</p>
+                    </div>
+                    <a href="/plus-two/eligibility" class="mt-4 inline-block bg-white text-primary-700 font-semibold px-6 py-2 rounded shadow hover:bg-blue-50 transition">Learn More</a>
+                </div>
+                <div class="bg-gradient-to-br from-secondary-600 to-secondary-700 text-white rounded-xl shadow-lg p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Bachelor of Hotel Management</h3>
+                        <p class="mb-4">An undergraduate degree program that equips students with advanced knowledge and practical skills for a successful career in hospitality.</p>
+                    </div>
+                    <a href="/bhm/syllabus" class="mt-4 inline-block bg-white text-secondary-700 font-semibold px-6 py-2 rounded shadow hover:bg-purple-50 transition">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Highlight -->
+    <section class="py-16 bg-gray-50" id="departments">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">Departments</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+                    <i class="fas fa-concierge-bell text-4xl text-primary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-1">Front Office</h4>
+                    <p class="text-gray-600 text-sm">Professional guest services and reception management.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+                    <i class="fas fa-utensils text-4xl text-secondary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-1">Food Production</h4>
+                    <p class="text-gray-600 text-sm">Culinary arts and kitchen operations training.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+                    <i class="fas fa-glass-cheers text-4xl text-primary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-1">Food & Beverage</h4>
+                    <p class="text-gray-600 text-sm">Service excellence in food and beverage management.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+                    <i class="fas fa-broom text-4xl text-secondary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-1">House Keeping</h4>
+                    <p class="text-gray-600 text-sm">Maintaining hygiene and guest comfort standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Features -->
+    <section class="py-16 bg-white" id="features">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">Why Choose Us?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl shadow p-8 text-center">
+                    <i class="fas fa-user-tie text-3xl text-primary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-2">Expert Faculty</h4>
+                    <p class="text-gray-700">Learn from industry professionals and experienced educators.</p>
+                </div>
+                <div class="bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-xl shadow p-8 text-center">
+                    <i class="fas fa-globe-asia text-3xl text-secondary-600 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-2">Global Exposure</h4>
+                    <p class="text-gray-700">International internships and placement opportunities.</p>
+                </div>
+                <div class="bg-gradient-to-br from-amber-100 to-amber-200 rounded-xl shadow p-8 text-center">
+                    <i class="fas fa-building text-3xl text-amber-500 mb-3"></i>
+                    <h4 class="font-bold text-lg mb-2">Modern Facilities</h4>
+                    <p class="text-gray-700">State-of-the-art labs, kitchens, and learning spaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Preview -->
+    <section class="py-16 bg-gray-50" id="gallery">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">Campus Gallery</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Gallery 1" class="rounded-lg shadow-md object-cover h-40 w-full">
+                <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=400&q=80" alt="Gallery 2" class="rounded-lg shadow-md object-cover h-40 w-full">
+                <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80" alt="Gallery 3" class="rounded-lg shadow-md object-cover h-40 w-full">
+                <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Gallery 4" class="rounded-lg shadow-md object-cover h-40 w-full">
+            </div>
+            <div class="text-center mt-8">
+                <a href="/gallery" class="inline-block bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:from-primary-700 hover:to-secondary-700 transition">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events/News Section -->
+    <section class="py-16 bg-white" id="events">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">Latest Events & News</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl shadow p-6">
+                    <h4 class="font-bold text-lg mb-2">International Food Festival 2024</h4>
+                    <p class="text-gray-600 mb-2">Experience cuisines from around the world, prepared by our students and faculty.</p>
+                    <span class="text-xs text-primary-600">April 15, 2024</span>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow p-6">
+                    <h4 class="font-bold text-lg mb-2">Guest Lecture: Hospitality Trends</h4>
+                    <p class="text-gray-600 mb-2">Join us for an insightful session with industry leaders on the future of hospitality.</p>
+                    <span class="text-xs text-primary-600">March 28, 2024</span>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow p-6">
+                    <h4 class="font-bold text-lg mb-2">Admissions Open for 2024</h4>
+                    <p class="text-gray-600 mb-2">Apply now for our +2 and Bachelor programs in Hotel Management.</p>
+                    <span class="text-xs text-primary-600">February 10, 2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gradient-to-r from-primary-50 to-secondary-50" id="testimonials">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary-700 mb-10">What Our Students Say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student 1" class="w-20 h-20 rounded-full mb-4 border-4 border-primary-600">
+                    <p class="text-gray-700 mb-3">"The hands-on training and supportive faculty helped me launch my career in hospitality!"</p>
+                    <span class="font-bold text-primary-700">Rahul Sharma</span>
+                    <span class="text-sm text-gray-500">BHM Graduate</span>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Student 2" class="w-20 h-20 rounded-full mb-4 border-4 border-secondary-600">
+                    <p class="text-gray-700 mb-3">"The international internship program gave me global exposure and confidence."</p>
+                    <span class="font-bold text-secondary-700">Sneha Thapa</span>
+                    <span class="text-sm text-gray-500">+2 in Hotel Management</span>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Student 3" class="w-20 h-20 rounded-full mb-4 border-4 border-amber-500">
+                    <p class="text-gray-700 mb-3">"Modern facilities and a vibrant campus life made my learning experience memorable."</p>
+                    <span class="font-bold text-amber-600">Dipesh Chaudhary</span>
+                    <span class="text-sm text-gray-500">BHM Student</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-r from-primary-600 to-secondary-600 text-white text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+            <p class="mb-8 text-lg">Join Itahari Namuna College and become a leader in the hospitality industry. Apply now or contact us for more information!</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/apply" class="bg-white text-primary-700 font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-blue-50 transition">Apply Now</a>
+                <a href="/contact" class="bg-white/20 border border-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-white/30 transition">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-2">Itahari Namuna College</h3>
+                <p class="text-gray-400 mb-2">Excellence in Hotel Management</p>
+                <div class="flex space-x-3 mt-4">
+                    <a href="#" class="text-blue-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-pink-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-2">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="/" class="hover:text-white">Home</a></li>
+                    <li><a href="/about" class="hover:text-white">About</a></li>
+                    <li><a href="/programs" class="hover:text-white">Programs</a></li>
+                    <li><a href="/contact" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-2">Contact</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><i class="fas fa-map-marker-alt mr-2"></i>Itahari, Sunsari, Nepal</li>
+                    <li><i class="fas fa-phone-alt mr-2"></i>+977 9801234567</li>
+                    <li><i class="fas fa-envelope mr-2"></i>info@incollege.edu.np</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-2">Newsletter</h4>
+                <form class="flex flex-col space-y-2">
+                    <input type="email" placeholder="Your email address" class="px-4 py-2 rounded bg-gray-800 text-gray-200 focus:outline-none">
+                    <button type="submit" class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-4 py-2 rounded hover:from-primary-700 hover:to-secondary-700 transition">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-8 text-sm">&copy; 2024 Itahari Namuna College. All rights reserved.</div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="fixed inset-0 z-50 items-center justify-center hidden" id="login-modal-overlay">
+        <div class="modal-overlay absolute inset-0" onclick="hideModal('login-modal')"></div>
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md relative z-10 transform transition-all" id="login-modal">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Login to Your Account</h3>
+                    <button onclick="hideModal('login-modal')" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="login-email" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="your@email.com"
+                        >
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input 
+                            type="password" 
+                            id="login-password" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="••••••••"
+                        >
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-primary-600 hover:text-primary-500">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-2 px-4 rounded-md shadow-md transition">
+                        Sign In
+                    </button>
+                </form>
+                <div class="mt-4 text-center text-sm text-gray-600">
+                    Don't have an account? 
+                    <button onclick="hideModal('login-modal'); showModal('register-modal')" class="text-primary-600 hover:text-primary-500 ml-1">
+                        Register here
+                    </button>
+                </div>
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <i class="fab fa-google text-red-500 mr-2"></i> Google
+                        </button>
+                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <i class="fab fa-facebook-f text-blue-600 mr-2"></i> Facebook
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="fixed inset-0 z-50 items-center justify-center hidden" id="register-modal-overlay">
+        <div class="modal-overlay absolute inset-0" onclick="hideModal('register-modal')"></div>
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md relative z-10 transform transition-all" id="register-modal">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Create New Account</h3>
+                    <button onclick="hideModal('register-modal')" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form class="space-y-4">
+                    <div>
+                        <label for="register-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="register-name" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="John Doe"
+                        >
+                    </div>
+                    <div>
+                        <label for="register-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="register-email" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="your@email.com"
+                        >
+                    </div>
+                    <div>
+                        <label for="register-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="register-phone" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="+977 98XXXXXXXX"
+                        >
+                    </div>
+                    <div>
+                        <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input 
+                            type="password" 
+                            id="register-password" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="••••••••"
+                        >
+                    </div>
+                    <div>
+                        <label for="register-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            id="register-confirm-password" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="••••••••"
+                        >
+                    </div>
+                    <div class="flex items-center">
+                        <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">
+                            I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-2 px-4 rounded-md shadow-md transition">
+                        Create Account
+                    </button>
+                </form>
+                <div class="mt-4 text-center text-sm text-gray-600">
+                    Already have an account? 
+                    <button onclick="hideModal('register-modal'); showModal('login-modal')" class="text-blue-600 hover:text-blue-500 ml-1">
+                        Login here
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Track which dropdown is currently open
+    let currentDropdown = null;
+
+    // Track mobile menu state
+    let mobileMenuOpen = false;
+
+    // Track mobile dropdown state
+    let currentMobileDropdown = null;
+
+    // Close all dropdowns
+    function closeAllDropdowns() {
+        document.querySelectorAll('[id$="-dropdown"]').forEach(dropdown => {
+            dropdown.classList.add('hidden');
+        });
+        document.querySelectorAll('[id$="-chevron"]').forEach(chevron => {
+            chevron.classList.remove('transform', 'rotate-180');
+        });
+        currentDropdown = null;
     }
 
-    // Start all animations after page load
-    window.onload = function() {
-      animateValue("yearsExp", 0, 15, 2000);
-      animateValue("graduates", 0, 1200, 2000);
-      animateValue("partners", 0, 45, 2000);
-      animateValue("instructors", 0, 28, 2000);
-      
-      // Auto-rotate testimonials
-      setInterval(rotateTestimonials, 5000);
-    };
-
-    // Testimonial rotation
-    let currentTestimonial = 0;
-    const testimonials = document.querySelectorAll('[id^="testimonial"]');
-
-    function showTestimonial(index) {
-      testimonials.forEach((testimonial, i) => {
-        testimonial.classList.toggle('opacity-0', i !== index);
-        testimonial.classList.toggle('opacity-100', i === index);
-      });
-      
-      // Update buttons
-      document.querySelectorAll('[onclick^="showTestimonial"]').forEach((btn, i) => {
-        btn.classList.toggle('bg-blue-600', i === index);
-        btn.classList.toggle('bg-gray-300', i !== index);
-      });
-      
-      currentTestimonial = index;
+    // Close all mobile dropdowns
+    function closeAllMobileDropdowns() {
+        document.querySelectorAll('[id^="mobile-"]').forEach(dropdown => {
+            if (dropdown.id.includes('-dropdown')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+        document.querySelectorAll('[id^="mobile-"]').forEach(chevron => {
+            if (chevron.id.includes('-chevron')) {
+                chevron.classList.remove('transform', 'rotate-180');
+            }
+        });
+        currentMobileDropdown = null;
     }
 
-    function rotateTestimonials() {
-      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-      showTestimonial(currentTestimonial);
+    // Toggle dropdown
+    function toggleDropdown(dropdownId) {
+const dropdown = document.getElementById(`${dropdownId}-dropdown`);
+const chevron = document.getElementById(`${dropdownId}-chevron`);
+        if (currentDropdown === dropdownId) {
+            dropdown.classList.add('hidden');
+            chevron.classList.remove('transform', 'rotate-180');
+            currentDropdown = null;
+        } else {
+            closeAllDropdowns();
+            dropdown.classList.remove('hidden');
+            chevron.classList.add('transform', 'rotate-180');
+            currentDropdown = dropdownId;
+        }
     }
-  </script>
+
+    // Toggle mobile dropdown
+    function toggleMobileDropdown(dropdownId) {
+const dropdown = document.getElementById(`${dropdownId}-dropdown`);
+const chevron = document.getElementById(`${dropdownId}-chevron`);
+
+        if (currentMobileDropdown === dropdownId) {
+            dropdown.classList.add('hidden');
+            chevron.classList.remove('transform', 'rotate-180');
+            currentMobileDropdown = null;
+        } else {
+            closeAllMobileDropdowns();
+            dropdown.classList.remove('hidden');
+            chevron.classList.add('transform', 'rotate-180');
+            currentMobileDropdown = dropdownId;
+        }
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        if (mobileMenuOpen) {
+            mobileMenu.classList.add('hidden');
+            mobileMenuIcon.classList.remove('fa-times');
+            mobileMenuIcon.classList.add('fa-bars');
+            closeAllMobileDropdowns();
+        } else {
+            mobileMenu.classList.remove('hidden');
+            mobileMenuIcon.classList.remove('fa-bars');
+            mobileMenuIcon.classList.add('fa-times');
+        }
+
+        mobileMenuOpen = !mobileMenuOpen;
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        mobileMenu.classList.add('hidden');
+        mobileMenuIcon.classList.remove('fa-times');
+        mobileMenuIcon.classList.add('fa-bars');
+        mobileMenuOpen = false;
+        closeAllMobileDropdowns();
+    }
+
+    // Show modal
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+const overlay = document.getElementById(`${modalId}-overlay`);        modal.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        setTimeout(() => {
+            modal.classList.add('modal-enter-active');
+        }, 10);
+    }
+
+    // Hide modal
+    function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+const overlay = document.getElementById(`${modalId}-overlay`);        modal.classList.remove('modal-enter-active');
+        overlay.classList.add('hidden');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 200);
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.relative') && currentDropdown) {
+            closeAllDropdowns();
+        }
+    });
+
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 10) {
+            navbar.classList.add('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+        } else {
+            navbar.classList.remove('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+        }
+    });
+
+    // Initialize navbar with scroll effect
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 10) {
+            navbar.classList.add('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+        }
+    });
+</script>
+
 </body>
 </html>
-    
-    
