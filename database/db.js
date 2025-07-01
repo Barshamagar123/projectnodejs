@@ -22,8 +22,7 @@ db.students = require("./../model/studentAdd")(sequelize, DataTypes);
 db.departments = require("./../model/departmentAdd")(sequelize, DataTypes);
 db.registers = require(".././model/registerMode")(sequelize, DataTypes);
 db.gallerys=require(".././model/galleryModel")(sequelize,DataTypes)
-
-// Define associations BEFORE sync
+db.teams = require(".././model/teamAdd")(sequelize, DataTypes);// Define associations BEFORE sync
 db.registers.hasMany(db.students);
 db.students.belongsTo(db.registers);
 

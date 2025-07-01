@@ -2,32 +2,32 @@ const express=require("express")
 const app=express()
 const {multer,storage}=require('./middleware/multerConfig.js')
 const {db, sequelize }=require("./database/db.js")
-app.set("views engine","ejs")
+app.set("view engine","ejs")
+const isLogged=require("./middleware/isLogged")
 const upload = multer({storage:storage})
-const bcrypt= require("bcrypt")
+// const bcrypt= require("bcrypt")
 const jwt=require("jsonwebtoken")
-const { renderRegister, renderRegisterget, renderLogin, renderLoginPage } = require("./controller/registerController.js")
+const studentRoute=require("./routes/studentRoute.js")
+const registerRoute=require("./routes/registerRoute.js")
+const gallaryRoute=require("./routes/gallaryRoute.js")
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./storage/"))
+// Make sure this points to the directory where images are uploaded // Try without the ./
 app.get("/",(request,response)=>{
     response.render("home.ejs")
 })
-app.get("/register",renderRegisterget)
-app.post("/register", renderRegister)
-
-app.post("/login",renderLogin)
-app.get("/login",renderLoginPage)
+app.use("/",registerRoute)
+app.use("/",studentRoute)
 
 app.get("/studentdashboard",(request,response)=>{
     response.render("./studentdashboard/layout.ejs")
 })
-app.get("/team",(request,response)=>{
-    response.render("./pages/ourTeam.ejs")
+
+app.get("/about",(request,response)=>{
+    response.render("./pages/about.ejs")
 })
-app.get("/students",async (request,response)=>{
-    const datas=await db.students.findAll()
-    response.render("./admindashboard/student/display.ejs",{hotels:datas})
-})
+
+
 app.get("/studentprofile/:id",async(request,response)=>{
         const id=request.params.id
      const datas=await db.students.findAll({
@@ -70,29 +70,7 @@ app.get("/course",(request,response)=>{
 app.get("/results",(request,response)=>{
     response.render("./admindashboard/result/results.ejs")
 })
-app.get("/addStudent",(request,response)=>{
-    response.render("./admindashboard/student/addStudent.ejs")
-})
-app.post("/addStudent",upload.single('image'),async(request,response)=>{
-    
-    const {firstname,lastname,email,phone,birth,gender,address,studentid,course,year,semester}=request.body
-await db.students.create({
-    firstname:firstname,
-    lastname:lastname,
-    email:email,
-    phone:phone,
-    birth:birth,
-    gender:gender,
-    address:address,
-    image:process.env.backendUrl + request.file.filename,
-    studentid:studentid,
-    course:course,
-    year:year,
-    semester:semester,
-    
-})
-    response.send("added succesfully")
-})
+
 app.get("/teacherdashboad",(request,response)=>{
     response.render("./teacherdashboard/teacherhome.ejs")
 })
@@ -100,12 +78,6 @@ app.get("/admin",(request,response)=>{
     response.render("./admindashboard/layout.ejs")
 })
 
-app.get("/adminteam",(request,response)=>{
-    response.render("./admindashboard/team/displayTeam.ejs")
-})
-app.get("/addTeam",(request,response)=>{
-    response.render("./admindashboard/team/addTeam.ejs")
-})
 app.get("/teacherdashboard",(request,response)=>{
     response.render("./teacherdashboard/teacherhome.ejs")
 })
@@ -124,28 +96,35 @@ app.get("/addEvents",(request,response)=>{
 app.get("/addnotice",(request,response)=>{
     response.render("./admindashboard/notice/addnotice.ejs")
 })
-app.get("/addgallery",(request,response)=>{
-    response.render("./admindashboard/gallerymgmt/addgalary.ejs")
+app.use("/",gallaryRoute)
+app.get("/team",(request,response)=>{
+    response.render("./pages/ourTeam.ejs")
 })
-app.get("/displaygallery",(request,response)=>{
-    response.render("./admindashboard/gallerymgmt/displaygallery.ejs")
+app.get("/adminteam",async(request,response)=>{
+   const members= await db.teams.findAll()
+    response.render("./admindashboard/team/displayTeam.ejs",{groups:members})
 })
-app.get("/gallery",(request,response)=>{
-    response.render("./pages/gallery.ejs")
+app.get("/addTeam",(request,response)=>{
+    response.render("./admindashboard/team/addTeam.ejs")
+})
+app.post("/addTeam",upload.single('image'),async(request,response)=>{
+const {full_name,email,department,position,joindate,status}=request.body
+   await db.teams.create({
+    full_name:full_name,
+    email:email,
+    department:department,
+    position:position,
+    joindate:joindate,
+    status:status,
+    image:process.env.backendUrl + request.file.filename
+   })
+   response.send("added succesfully")
+})
+app.get("/vision",(request,response)=>{
+    response.render("./pages/chairman.ejs")
 })
 app.get("/notice",(request,response)=>{
     response.render("./admindashboard/notice/displaynotice.ejs")
-})
-app.post("addgallery",async(request,response)=>{
-    const {title,image,category,date,description}=request.body
- await db.gallerys.create({
-    title:title,
-    image:image,
-    category:category,
-    date:date,
-    description:description
- })
- response.send("added successfully")
 })
 app.listen(4000,(request,respone)=>{
     console.log("backend has started at port number 4000")

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Hotel Management at Itahari Namuna College</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .hero-about {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navbar (same as your other pages) -->
+  <%- include('../partials/navbar.ejs') %>
+
+  <!-- Hero Section -->
+  <section class="hero-about py-20 text-white text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">About Itahari Namuna College</h1>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto">
+        Excellence in Hospitality Education Since 2010
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12">
+    <!-- College Introduction -->
+    <section class="mb-16">
+      <div class="flex flex-col md:flex-row gap-8 items-center">
+        <div class="md:w-1/2">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Our Hotel Management Program</h2>
+          <p class="text-gray-600 mb-4">
+            At Itahari Namuna College, we take pride in offering one of the most comprehensive Hotel Management programs in Eastern Nepal. 
+            Our program combines theoretical knowledge with practical training to prepare students for successful careers in the 
+            dynamic hospitality industry.
+          </p>
+          <p class="text-gray-600 mb-6">
+            Located in the heart of Itahari, our college provides state-of-the-art facilities including a training kitchen, 
+            housekeeping lab, front office lab, and a model restaurant to give students hands-on experience.
+          </p>
+          <div class="bg-primary-100 border-l-4 border-primary-600 p-4">
+            <p class="text-primary-800 font-medium">
+              "Our mission is to develop skilled hospitality professionals with strong ethical values, 
+              leadership qualities, and global competencies."
+            </p>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <img src="https://images.unsplash.com/photo-1582719471387-9d8bbdd472d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
+               alt="College Campus" class="rounded-lg shadow-lg w-full h-auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose Our Hotel Management Program?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature-card bg-white p-6 rounded-lg shadow-md transition duration-300">
+          <div class="text-primary-600 text-4xl mb-4">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800">Industry-Aligned Curriculum</h3>
+          <p class="text-gray-600">
+            Our syllabus is regularly updated to match current industry standards and includes certifications in food safety, 
+            hospitality operations, and customer service.
+          </p>
+        </div>
+        
+        <div class="feature-card bg-white p-6 rounded-lg shadow-md transition duration-300">
+          <div class="text-primary-600 text-4xl mb-4">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800">Practical Training</h3>
+          <p class="text-gray-600">
+            Students gain hands-on experience through our operational training restaurant, industrial visits, 
+            and mandatory internships at leading hotels.
+          </p>
+        </div>
+        
+        <div class="feature-card bg-white p-6 rounded-lg shadow-md transition duration-300">
+          <div class="text-primary-600 text-4xl mb-4">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800">100% Placement Assistance</h3>
+          <p class="text-gray-600">
+            Our dedicated placement cell ensures students get placed in reputed national and international hotel chains 
+            after graduation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Experienced Faculty</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Faculty" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Mrs. Anjali Sharma</h3>
+            <p class="text-primary-600 text-sm mb-2">Head of Department</p>
+            <p class="text-gray-600 text-sm">
+              15+ years experience in luxury hotel management. Specializes in Food & Beverage Service.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Faculty" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Mr. Rajesh Thapa</h3>
+            <p class="text-primary-600 text-sm mb-2">Senior Lecturer</p>
+            <p class="text-gray-600 text-sm">
+              Former Executive Chef with international experience in 5-star hotels.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Faculty" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Ms. Priya Gurung</h3>
+            <p class="text-primary-600 text-sm mb-2">Lecturer</p>
+            <p class="text-gray-600 text-sm">
+              Housekeeping specialist with certifications from Switzerland.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Faculty" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="font-bold text-lg">Mr. Sanjay Rai</h3>
+            <p class="text-primary-600 text-sm mb-2">Practical Instructor</p>
+            <p class="text-gray-600 text-sm">
+              Front Office expert with 12 years experience in hospitality industry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Facilities</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
+                 alt="Training Kitchen" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+              <h3 class="text-white text-xl font-bold">Professional Training Kitchen</h3>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600">
+              Fully equipped industrial kitchen with modern appliances where students learn culinary arts and food production.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1566669437686-c2b5c395c4b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
+                 alt="Model Restaurant" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+              <h3 class="text-white text-xl font-bold">Model Restaurant</h3>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600">
+              Operational training restaurant where students practice food service, customer handling, and restaurant management.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1583845112203-29329902330b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Front Office Lab" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+              <h3 class="text-white text-xl font-bold">Front Office Lab</h3>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600">
+              Simulated hotel reception area with property management system software for real-world training.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+          <div class="relative h-64">
+            <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Housekeeping Lab" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+              <h3 class="text-white text-xl font-bold">Housekeeping Lab</h3>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-600">
+              Fully equipped lab with model guest rooms for practicing housekeeping operations and laundry management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+
+    
+  </main>
+
+  
+  
+</body>
+</html>
